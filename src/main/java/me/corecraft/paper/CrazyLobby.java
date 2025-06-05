@@ -26,9 +26,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.incendo.cloud.CommandManager;
 import org.incendo.cloud.execution.ExecutionCoordinator;
-import org.incendo.cloud.minecraft.extras.MinecraftHelp;
 import org.incendo.cloud.paper.PaperCommandManager;
 import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
@@ -45,9 +43,9 @@ public class CrazyLobby extends JavaPlugin {
     private FileManager fileManager;
     private ItemManager itemManager;
     private MenuManager menuManager;
-    private FusionPaper api = null;
+    private FusionPaper api;
 
-    private PaperHelp help = null;
+    private PaperHelp help;
 
     @Override
     public void onEnable() {

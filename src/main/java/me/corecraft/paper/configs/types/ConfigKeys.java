@@ -19,6 +19,7 @@ public class ConfigKeys implements SettingsHolder {
         configuration.setComment("root", "The root config section");
     }
 
+    @Comment("Settings related to /crazylobby help")
     public static final Property<HelpProperty> help_property = newBeanProperty(HelpProperty.class, "root.help", new HelpProperty());
 
     @Comment("The prefix that appears in front of commands!")

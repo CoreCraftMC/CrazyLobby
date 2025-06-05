@@ -27,7 +27,7 @@ public class ProtectionKeys implements SettingsHolder {
             "",
             "Handles the sound to play, when a player cannot build, volume/pitch control, and Custom Sounds are supported!"
     })
-    public static final Property<SoundProperty> event_prevent_interact_sound = newBeanProperty(SoundProperty.class, "root.protection.block.prevent-interaction.sound", new SoundProperty().populate());
+    public static final Property<SoundProperty> event_prevent_interact_sound = newBeanProperty(SoundProperty.class, "root.protection.block.prevent-interaction.sound", new SoundProperty());
 
     @Comment("A list of blocks that can be interacted with.")
     public static final Property<List<String>> event_interactable_items = newListProperty("root.protection.block.interactable-items", List.of(

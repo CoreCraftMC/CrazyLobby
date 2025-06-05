@@ -2,19 +2,11 @@ package me.corecraft.paper.configs.objects;
 
 public class SoundProperty {
 
-    public String value;
+    public String value = "entity.villager.no";
 
-    public double volume;
+    public double volume = 1.0;
 
-    public float pitch;
-
-    public final SoundProperty populate() {
-        this.value = "entity.villager.no";
-        this.volume = 1.0;
-        this.pitch = 1.0f;
-
-        return this;
-    }
+    public float pitch = 1.0f;
 
     public void setValue(String value) {
         this.value = value;
