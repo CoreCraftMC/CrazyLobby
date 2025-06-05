@@ -3,7 +3,7 @@ package me.corecraft.paper.api;
 import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.core.files.types.YamlCustomFile;
 import com.ryderbelserion.fusion.core.utils.FileUtils;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.objects.menus.CustomMenu;
 import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class MenuManager {
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final Path path = this.plugin.getDataPath();
 

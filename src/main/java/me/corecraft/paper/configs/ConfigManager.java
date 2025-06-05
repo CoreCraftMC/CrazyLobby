@@ -8,7 +8,7 @@ import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.core.files.FileType;
 import com.ryderbelserion.fusion.core.files.types.JaluCustomFile;
 import com.ryderbelserion.fusion.core.utils.FileUtils;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.configs.types.ConfigKeys;
 import me.corecraft.paper.configs.types.ProtectionKeys;
 import me.corecraft.paper.configs.types.locale.ErrorKeys;
@@ -24,7 +24,7 @@ public class ConfigManager {
 
     private static final YamlFileResourceOptions options = YamlFileResourceOptions.builder().indentationSize(2).build();
 
-    private static final LobbyPlus plugin = LobbyPlus.get();
+    private static final CrazyLobby plugin = CrazyLobby.get();
 
     private static final Path path = plugin.getDataPath();
 

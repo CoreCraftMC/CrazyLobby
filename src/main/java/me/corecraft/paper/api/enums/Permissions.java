@@ -1,6 +1,6 @@
 package me.corecraft.paper.api.enums;
 
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -23,7 +23,7 @@ public enum Permissions {
 
     private final boolean register;
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final PluginManager manager = this.plugin.getServer().getPluginManager();
 

@@ -3,7 +3,7 @@ package me.corecraft.paper.listeners.players;
 import ch.jalu.configme.SettingsManager;
 import com.ryderbelserion.fusion.paper.api.enums.Scheduler;
 import com.ryderbelserion.fusion.paper.api.scheduler.FoliaScheduler;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.PaperUserManager;
 import me.corecraft.paper.api.enums.Permissions;
 import me.corecraft.paper.api.objects.PaperUser;
@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class DamageListener implements Listener {
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final PaperUserManager userManager = this.plugin.getUserManager();
 

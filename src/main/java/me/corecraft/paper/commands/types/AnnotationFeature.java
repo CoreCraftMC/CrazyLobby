@@ -4,7 +4,7 @@ import ch.jalu.configme.SettingsManager;
 import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.paper.FusionPaper;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.ItemManager;
 import me.corecraft.paper.api.MenuManager;
 import me.corecraft.paper.api.PaperUserManager;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AnnotationFeature {
 
-    protected final LobbyPlus plugin = LobbyPlus.get();
+    protected final CrazyLobby plugin = CrazyLobby.get();
 
     protected final MenuManager menuManager = this.plugin.getMenuManager();
 

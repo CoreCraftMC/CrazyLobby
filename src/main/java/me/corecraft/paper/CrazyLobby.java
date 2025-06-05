@@ -30,10 +30,10 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 import java.util.List;
 
-public class LobbyPlus extends JavaPlugin {
+public class CrazyLobby extends JavaPlugin {
 
-    public static LobbyPlus get() {
-        return JavaPlugin.getPlugin(LobbyPlus.class);
+    public static CrazyLobby get() {
+        return JavaPlugin.getPlugin(CrazyLobby.class);
     }
 
     private FusionPaper api = null;

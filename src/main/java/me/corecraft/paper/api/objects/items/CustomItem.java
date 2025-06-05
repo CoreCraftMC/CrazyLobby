@@ -5,7 +5,7 @@ import com.ryderbelserion.fusion.paper.FusionPaper;
 import com.ryderbelserion.fusion.paper.api.builders.items.ItemBuilder;
 import com.ryderbelserion.fusion.paper.api.enums.Scheduler;
 import com.ryderbelserion.fusion.paper.api.scheduler.FoliaScheduler;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.MenuManager;
 import me.corecraft.paper.api.enums.keys.ItemKeys;
 import me.corecraft.paper.api.objects.menus.CustomMenu;
@@ -25,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("FieldCanBeLocal")
 public class CustomItem {
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final MenuManager menuManager = this.plugin.getMenuManager();
 

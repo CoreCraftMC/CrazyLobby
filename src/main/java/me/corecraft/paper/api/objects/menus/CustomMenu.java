@@ -5,7 +5,7 @@ import com.ryderbelserion.fusion.core.files.types.YamlCustomFile;
 import com.ryderbelserion.fusion.paper.FusionPaper;
 import com.ryderbelserion.fusion.paper.api.builders.gui.interfaces.Gui;
 import com.ryderbelserion.fusion.paper.api.builders.items.ItemBuilder;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.configs.ConfigManager;
 import me.corecraft.paper.configs.types.ConfigKeys;
 import me.corecraft.paper.utils.ItemUtils;
@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("FieldCanBeLocal")
 public class CustomMenu {
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final FusionPaper paper = this.plugin.getApi();
 

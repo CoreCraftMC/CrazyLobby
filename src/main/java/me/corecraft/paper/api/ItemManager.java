@@ -3,7 +3,7 @@ package me.corecraft.paper.api;
 import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.core.files.types.YamlCustomFile;
 import com.ryderbelserion.fusion.core.utils.FileUtils;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.objects.items.CustomItem;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ItemManager {
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final Path path = this.plugin.getDataPath();
 

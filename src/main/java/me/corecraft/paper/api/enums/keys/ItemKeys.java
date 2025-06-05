@@ -1,6 +1,6 @@
 package me.corecraft.paper.api.enums.keys;
 
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +9,7 @@ public enum ItemKeys {
 
     basic_item("basic_item", PersistentDataType.STRING);
 
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final String NamespacedKey;
     private final PersistentDataType type;

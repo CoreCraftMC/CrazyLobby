@@ -7,7 +7,7 @@ import com.ryderbelserion.fusion.kyori.FusionKyori;
 import com.ryderbelserion.fusion.kyori.utils.StringUtils;
 import me.corecraft.api.enums.Action;
 import me.corecraft.api.objects.User;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.PaperUserManager;
 import me.corecraft.paper.configs.ConfigManager;
 import me.corecraft.paper.configs.types.ConfigKeys;
@@ -59,7 +59,7 @@ public enum Messages {
         this.isList = isList;
     }
     
-    private final LobbyPlus plugin = LobbyPlus.get();
+    private final CrazyLobby plugin = CrazyLobby.get();
 
     private final Server server = this.plugin.getServer();
 

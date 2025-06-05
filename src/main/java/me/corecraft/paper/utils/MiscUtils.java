@@ -2,7 +2,7 @@ package me.corecraft.paper.utils;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import me.corecraft.paper.LobbyPlus;
+import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.enums.Messages;
 import me.corecraft.paper.api.objects.items.CustomSound;
 import me.corecraft.paper.configs.objects.SoundProperty;
@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 public class MiscUtils {
 
-    private static final LobbyPlus plugin = LobbyPlus.get();
+    private static final CrazyLobby plugin = CrazyLobby.get();
 
     private static final ComponentLogger logger = plugin.getComponentLogger();
 
