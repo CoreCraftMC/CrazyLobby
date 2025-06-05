@@ -2,9 +2,6 @@ package me.corecraft.paper.commands.types.basic;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import me.corecraft.paper.commands.types.AnnotationFeature;
-import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import org.incendo.cloud.CommandManager;
 import org.incendo.cloud.annotation.specifier.Greedy;
 import org.incendo.cloud.annotations.AnnotationParser;
@@ -14,35 +11,17 @@ import org.incendo.cloud.annotations.CommandDescription;
 import org.incendo.cloud.annotations.suggestion.Suggestions;
 import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.help.result.CommandEntry;
-import org.incendo.cloud.minecraft.extras.AudienceProvider;
-import org.incendo.cloud.minecraft.extras.MinecraftHelp;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class CommandHelp extends AnnotationFeature {
 
-    private MinecraftHelp<CommandSourceStack> help;
     private CommandManager<CommandSourceStack> manager;
 
     @Override
     public void registerFeature(@NotNull final AnnotationParser<CommandSourceStack> parser) {
         this.manager = parser.manager();
-
-        this.help = MinecraftHelp.<CommandSourceStack>builder()
-                .commandManager(this.manager)
-                .audienceProvider(CommandSourceStack::getSender)
-                .commandPrefix("/crazylobby help")
-                .colors(MinecraftHelp.helpColors(
-                        NamedTextColor.GOLD,
-                        NamedTextColor.RED,
-                        NamedTextColor.GREEN,
-                        NamedTextColor.BLUE,
-                        NamedTextColor.YELLOW
-                ))
-                .maxResultsPerPage(10)
-                /* other settings... */
-                .build();
 
         parser.parse(this);
     }
@@ -63,6 +42,6 @@ public class CommandHelp extends AnnotationFeature {
     @Command("crazylobby help <query>")
     @CommandDescription("Shows the player the help menu!")
     public void help(@NotNull final CommandSourceStack sender, final @Argument(value = "query", suggestions = "help_queries") @Greedy @Nullable String query) {
-        this.help.queryCommands(query == null ? "" : query, sender);
+        this.help.getHelp().queryCommands(query == null ? "" : query, sender);
     }
 }

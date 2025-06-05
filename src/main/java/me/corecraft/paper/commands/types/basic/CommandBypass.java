@@ -1,5 +1,6 @@
 package me.corecraft.paper.commands.types.basic;
 
+import ch.jalu.configme.SettingsManager;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import me.corecraft.paper.api.enums.Messages;
 import me.corecraft.paper.api.enums.types.BypassType;
@@ -20,6 +21,8 @@ public class CommandBypass extends AnnotationFeature {
     @Permission(value = "crazylobby.bypass", mode = Permission.Mode.ANY_OF)
     public void bypass(final Player player, @Argument("type") @NotNull final BypassType type) {
         final PaperUser user = this.userManager.getUser(player.getUniqueId());
+
+        final SettingsManager locale = user.locale();
 
         if (user.activeBypassTypes.contains(type.getName())) {
             user.activeBypassTypes.remove(type.getName());

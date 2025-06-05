@@ -30,6 +30,8 @@ public class CommandReload extends AnnotationFeature {
 
         this.itemManager.load(false);
 
+        this.help.init();
+
         Messages.reload_plugin.sendMessage(sender);
     }
 }

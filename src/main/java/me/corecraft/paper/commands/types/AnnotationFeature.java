@@ -8,6 +8,7 @@ import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.api.ItemManager;
 import me.corecraft.paper.api.MenuManager;
 import me.corecraft.paper.api.PaperUserManager;
+import me.corecraft.paper.api.objects.PaperHelp;
 import me.corecraft.paper.configs.ConfigManager;
 import org.incendo.cloud.annotations.AnnotationParser;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AnnotationFeature {
 
     protected final CrazyLobby plugin = CrazyLobby.get();
+
+    protected final PaperHelp help = this.plugin.getHelp();
 
     protected final MenuManager menuManager = this.plugin.getMenuManager();
 
@@ -26,7 +29,7 @@ public abstract class AnnotationFeature {
 
     protected final PaperUserManager userManager = this.plugin.getUserManager();
 
-    protected final SettingsManager locale = ConfigManager.getLocale();
+    protected final SettingsManager config = ConfigManager.getConfig();
 
     public abstract void registerFeature(@NotNull final AnnotationParser<CommandSourceStack> parser);
 
