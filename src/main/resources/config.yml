@@ -13,13 +13,13 @@ root:
       # The highlight colors.
       highlight:
         # The primary color used to highlight commands and queries.
-        color: "255,85,85"
+        color: "85,255,85"
         # The secondary color used to highlight commands and queries.
         alternative: "255,255,85"
       # The color used for description text.
-      text-color: "255,255,255"
+      text-color: "170,170,170"
       # The color used for accents and symbols.
-      accent-color: "85,255,85"
+      accent-color: "170,170,170"
   # This option will tell the plugin to send all messages as action bars or messages in chat.
   #
   # send_message -> sends messages in chat.

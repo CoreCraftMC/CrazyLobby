@@ -9,59 +9,23 @@ public class HelpProperty {
     @Comment("The amount of commands to show per page.")
     public int resultsPerPage = 10;
 
-    @ExportName("primary-color")
-    @Comment("The primary color for the color scheme.")
-    public String primaryColor = "42,42,0";
-
-    @ExportName("highlight")
-    @Comment("The highlight colors.")
-    private HighlightProperty highlight = new HighlightProperty();
-
-    @ExportName("text-color")
-    @Comment("The color used for description text.")
-    public String textColor = "63,63,63";
-
-    @ExportName("accent-color")
-    @Comment("The color used for accents and symbols.")
-    public String accentColor = "21,63,21";
+    @ExportName("colors")
+    @Comment("The colors used to stylize /crazylobby help.")
+    private ColorProperty color = new ColorProperty();
 
     public void setResultsPerPage(final int resultsPerPage) {
         this.resultsPerPage = resultsPerPage;
     }
 
-    public void setPrimaryColor(final String primaryColor) {
-        this.primaryColor = primaryColor;
-    }
-
-    public void setHighlight(HighlightProperty highlight) {
-        this.highlight = highlight;
-    }
-
-    public void setAccentColor(final String accentColor) {
-        this.accentColor = accentColor;
-    }
-
-    public void setTextColor(final String textColor) {
-        this.textColor = textColor;
-    }
-
-    public HighlightProperty getHighlight() {
-        return this.highlight;
-    }
-
-    public String getPrimaryColor() {
-        return this.primaryColor;
-    }
-
-    public String getAccentColor() {
-        return this.accentColor;
+    public void setColor(ColorProperty color) {
+        this.color = color;
     }
 
     public int getResultsPerPage() {
         return this.resultsPerPage;
     }
 
-    public String getTextColor() {
-        return this.textColor;
+    public ColorProperty getColor() {
+        return this.color;
     }
 }

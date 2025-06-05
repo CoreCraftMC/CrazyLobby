@@ -7,11 +7,11 @@ public class HighlightProperty {
 
     @ExportName("alternative")
     @Comment("The secondary color used to highlight commands and queries.")
-    public String highlightColorAlternative = "63,63,21";
+    public String highlightColorAlternative = "255,85,85";
 
     @ExportName("color")
     @Comment("The primary color used to highlight commands and queries.")
-    public String highlightColor = "63,21,21";
+    public String highlightColor = "255,255,85";
 
     public void setHighlightColorAlternative(final String highlightColorAlternative) {
         this.highlightColorAlternative = highlightColorAlternative;

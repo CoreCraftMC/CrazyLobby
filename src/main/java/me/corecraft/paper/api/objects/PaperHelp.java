@@ -4,6 +4,7 @@ import ch.jalu.configme.SettingsManager;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import me.corecraft.paper.CrazyLobby;
 import me.corecraft.paper.configs.ConfigManager;
+import me.corecraft.paper.configs.objects.help.ColorProperty;
 import me.corecraft.paper.configs.objects.help.HelpProperty;
 import me.corecraft.paper.configs.objects.help.HighlightProperty;
 import me.corecraft.paper.configs.types.ConfigKeys;
@@ -27,14 +28,16 @@ public class PaperHelp {
     public void init() {
         final HelpProperty property = this.config.getProperty(ConfigKeys.help_property);
 
-        final TextColor primaryColor = getColor(property.getPrimaryColor());
+        final ColorProperty color = property.getColor();
 
-        final HighlightProperty highlightProperty = property.getHighlight();
+        final TextColor primaryColor = getColor(color.getPrimaryColor());
+
+        final HighlightProperty highlightProperty = color.getHighlight();
 
         final TextColor highlightColor = getColor(highlightProperty.getHighlightColor());
         final TextColor highlightColorAlternative = getColor(highlightProperty.getHighlightColorAlternative());
-        final TextColor textColor = getColor(property.getTextColor());
-        final TextColor accentColor = getColor(property.getAccentColor());
+        final TextColor textColor = getColor(color.getTextColor());
+        final TextColor accentColor = getColor(color.getAccentColor());
 
         this.help = MinecraftHelp.<CommandSourceStack>builder()
                 .commandManager(this.manager)
