@@ -1,0 +1,41 @@
+# Should the item be given on join?
+force-give: true
+
+# Settings related to velocity.
+velocity:
+  # Should this be enabled?
+  enabled: false
+  # The server to send the player to.
+  server: ""
+
+# The menu to open from the menu's folder.
+open-menu: ""
+
+item:
+  # The name of an item.
+  name: "<red>Server Selector"
+  # The material of an item.
+  type: "compass"
+  # The lore of an item.
+  lore:
+    - "Choose a server you want to go to!"
+  # The amount to display.
+  amount: 1
+  # The slot of the item in the inventory.
+  slot: 4
+
+sound:
+  # Should the click sound be played?
+  toggle: true
+  # The sound played when clicking
+  type: "ui.button.click"
+  # The volume of the sound
+  volume: 1.0
+  # The pitch of the sound
+  pitch: 1.0
+
+# A list of commands to run.
+commands: []
+
+# A list of messages to send.
+messages: []

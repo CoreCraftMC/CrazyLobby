@@ -1,0 +1,87 @@
+# The title of the inventory.
+title: "your title"
+
+# The size of the inventory.
+rows: 6
+
+filler:
+  # Should we fill the inventory?
+  toggle: false
+  # The name of the item.
+  name: ""
+  # The item to fill the inventory with.
+  type: "red_stained_glass_pane"
+  # The lore of the item.
+  lore: []
+  # The amount to display.
+  amount: 1
+
+buttons:
+  button_one: # the name of the button section.
+    # The name of the item.
+    name: "this is an item."
+    # The item to set.
+    type: "diamond_sword"
+    # The lore of the item.
+    lore: []
+    # The amount to display.
+    amount: 3
+    # The slot in the gui.
+    slot: 10
+    # Other misc settings!
+    settings:
+      # The enchantments on the item. enchantment: level
+      enchantments:
+        # Sharp!
+        sharpness: 3
+      # Item model settings
+      item-model:
+        # The namespace i.e. nexo
+        namespace: ""
+        # The id i.e. emerald_helmet
+        id: ""
+      item-damage: -1
+      # Skull settings
+      skull:
+        # The id from HeadDatabase API
+        hdb: ""
+        # The player name i.e. ryderbelserion
+        player: ""
+        # The texture from minecraft-heads
+        texture: ""
+      trim:
+        # https://jd.papermc.io/paper/1.21.5/org/bukkit/inventory/meta/trim/TrimPattern.html, Make sure to type it lowercase
+        pattern: ""
+        # https://jd.papermc.io/paper/1.21.5/org/bukkit/inventory/meta/trim/TrimMaterial.html, Make sure to type it lowercase.
+        material: ""
+      # Should the item glow?
+      glowing: false
+      # Should the tool tip be hidden?
+      hide-tool-tip: false
+      # A list of components to hide.
+      # https://jd.papermc.io/paper/1.21.5/io/papermc/paper/registry/keys/DataComponentTypeKeys.html, Grab the value from the description without minecraft:
+      hidden-components: []
+    # Settings related to velocity.
+    velocity:
+      # Should this be enabled?
+      enabled: false
+      # The server to send the player to.
+      server: ""
+    # Available placeholders: {player}, {prefix}
+    # Supports PlaceholderAPI!
+    commands:
+      - "a command"
+    # Available placeholders: {player}, {prefix}
+    # Supports PlaceholderAPI!
+    messages:
+      - "a message"
+    # Sound settings!
+    sound:
+      # Should the sound be enabled?
+      toggle: false
+      # The name of the sound from sounds.json which can be found on minecraft.wiki
+      type: "ui.button.click"
+      # How loud the sound is.
+      volume: 1.0
+      # The direction of the sound.
+      pitch: 1.0
