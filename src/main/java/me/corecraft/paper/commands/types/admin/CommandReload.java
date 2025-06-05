@@ -18,9 +18,9 @@ public class CommandReload extends AnnotationFeature {
         parser.parse(this);
     }
 
-    @Command("lobbyplus reload")
+    @Command("crazylobby reload")
     @CommandDescription("Reloads the plugin!")
-    @Permission(value = "lobbyplus.reload", mode = Permission.Mode.ANY_OF)
+    @Permission(value = "crazylobby.reload", mode = Permission.Mode.ANY_OF)
     public void reload(final CommandSender sender) {
         this.fusion.reload(false);
 

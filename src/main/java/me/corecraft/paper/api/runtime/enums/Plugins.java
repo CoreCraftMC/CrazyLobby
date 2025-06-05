@@ -5,7 +5,7 @@ import org.eclipse.aether.graph.Dependency;
 
 public enum Plugins {
 
-    fusion_paper("com.ryderbelserion.fusion", "fusion-paper", "1.14.1"),
+    fusion_paper("com.ryderbelserion.fusion", "fusion-paper", "1.14.2"),
 
     cloud_extras("org.incendo", "cloud-minecraft-extras", "2.0.0-beta.10"),
     cloud_annotations("org.incendo", "cloud-annotations", "2.0.0"),

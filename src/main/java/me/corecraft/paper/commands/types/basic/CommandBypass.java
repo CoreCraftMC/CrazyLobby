@@ -16,8 +16,8 @@ import java.util.HashMap;
 
 public class CommandBypass extends AnnotationFeature {
 
-    @Command(value = "lobbyplus bypass <type>", requiredSender = Player.class)
-    @Permission(value = "lobbyplus.bypass", mode = Permission.Mode.ANY_OF)
+    @Command(value = "crazylobby bypass <type>", requiredSender = Player.class)
+    @Permission(value = "crazylobby.bypass", mode = Permission.Mode.ANY_OF)
     public void bypass(final Player player, @Argument("type") @NotNull final BypassType type) {
         final PaperUser user = this.userManager.getUser(player.getUniqueId());
 

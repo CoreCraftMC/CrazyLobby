@@ -32,7 +32,7 @@ public class CommandHelp extends AnnotationFeature {
         this.help = MinecraftHelp.<CommandSourceStack>builder()
                 .commandManager(this.manager)
                 .audienceProvider(CommandSourceStack::getSender)
-                .commandPrefix("/lobbyplus help")
+                .commandPrefix("/crazylobby help")
                 .colors(MinecraftHelp.helpColors(
                         NamedTextColor.GOLD,
                         NamedTextColor.RED,
@@ -60,7 +60,7 @@ public class CommandHelp extends AnnotationFeature {
                 .toList();
     }
 
-    @Command("lobbyplus help <query>")
+    @Command("crazylobby help <query>")
     @CommandDescription("Shows the player the help menu!")
     public void help(@NotNull final CommandSourceStack sender, final @Argument(value = "query", suggestions = "help_queries") @Greedy @Nullable String query) {
         this.help.queryCommands(query == null ? "" : query, sender);

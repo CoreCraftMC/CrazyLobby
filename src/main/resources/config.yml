@@ -2,11 +2,11 @@
 root:
   # The prefix that appears in front of commands!
   prefix: <dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>
-  # Settings related to /lobbyplus help
+  # Settings related to /crazylobby help
   help:
     # The amount of commands to show per page.
     results-per-page: 10
-    # The colors used to stylize /lobbyplus help.
+    # The colors used to stylize /crazylobby help.
     colors:
       # The primary color for the color scheme.
       primary-color: "gold"
