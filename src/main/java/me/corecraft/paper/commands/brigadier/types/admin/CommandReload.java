@@ -2,7 +2,6 @@ package me.corecraft.paper.commands.brigadier.types.admin;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.ryderbelserion.fusion.paper.FusionPaper;
-import com.ryderbelserion.fusion.paper.api.commands.PaperCommandManager;
 import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperCommand;
 import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
@@ -21,8 +20,6 @@ public class CommandReload extends AbstractPaperCommand {
     private final CrazyLobby plugin = CrazyLobby.get();
 
     private final FusionPaper fusion = this.plugin.getApi();
-
-    private final PaperCommandManager manager = this.fusion.getCommandManager();
 
     private final MenuManager menuManager = this.plugin.getMenuManager();
 
@@ -43,28 +40,11 @@ public class CommandReload extends AbstractPaperCommand {
 
     @Override
     public final boolean requirement(@NotNull final CommandSourceStack source) {
-        return this.manager.hasPermission(source, getPermissionMode(), getPermissions());
+        return source.getSender().hasPermission(getPermissions().getFirst());
     }
 
     @Override
     public @NotNull final LiteralCommandNode<CommandSourceStack> build() {
-        this.manager.registerPermissions(PermissionDefault.OP, getPermissions());
-
-        return literal().createBuilder().build();
-    }
-
-    @Override
-    public void unregister() {
-        this.manager.unregisterPermissions(getPermissions());
-    }
-
-    @Override
-    public @NotNull final String[] getPermissions() {
-        return new String[]{"crazylobby.reload"};
-    }
-
-    @Override
-    public @NotNull final LiteralCommandNode<CommandSourceStack> literal() {
         return Commands.literal("reload")
                 .requires(this::requirement)
                 .executes(context -> {
@@ -75,7 +55,12 @@ public class CommandReload extends AbstractPaperCommand {
     }
 
     @Override
-    public @NotNull final List<AbstractPaperCommand> getChildren() {
-        return List.of(new CommandReload());
+    public @NotNull final PermissionDefault getPermissionMode() {
+        return PermissionDefault.OP;
+    }
+
+    @Override
+    public @NotNull final List<String> getPermissions() {
+        return List.of("crazylobby.reload");
     }
 }

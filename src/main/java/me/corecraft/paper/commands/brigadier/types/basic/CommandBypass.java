@@ -5,8 +5,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import com.ryderbelserion.fusion.paper.FusionPaper;
-import com.ryderbelserion.fusion.paper.api.commands.PaperCommandManager;
 import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperCommand;
 import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
@@ -21,15 +19,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
+import java.util.List;
+
 import static io.papermc.paper.command.brigadier.Commands.argument;
 
 public class CommandBypass extends AbstractPaperCommand {
 
     private final CrazyLobby plugin = CrazyLobby.get();
-
-    private final FusionPaper fusion = this.plugin.getApi();
-
-    private final PaperCommandManager manager = this.fusion.getCommandManager();
 
     private final PaperUserManager userManager = this.plugin.getUserManager();
 
@@ -70,28 +66,11 @@ public class CommandBypass extends AbstractPaperCommand {
 
     @Override
     public final boolean requirement(@NotNull final CommandSourceStack source) {
-        return this.manager.hasPermission(source, getPermissionMode(), getPermissions());
+        return source.getSender().hasPermission(getPermissions().getFirst());
     }
 
     @Override
     public @NotNull final LiteralCommandNode<CommandSourceStack> build() {
-        this.manager.registerPermissions(PermissionDefault.OP, getPermissions());
-
-        return literal().createBuilder().build();
-    }
-
-    @Override
-    public void unregister() {
-        this.manager.unregisterPermissions(getPermissions());
-    }
-
-    @Override
-    public @NotNull final String[] getPermissions() {
-        return new String[]{"crazylobby.bypass"};
-    }
-
-    @Override
-    public @NotNull final LiteralCommandNode<CommandSourceStack> literal() {
         final LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("bypass").requires(this::requirement);
 
         final RequiredArgumentBuilder<CommandSourceStack, String> arg1 = argument("bypass_type", StringArgumentType.string()).suggests((ctx, builder) -> {
@@ -107,5 +86,15 @@ public class CommandBypass extends AbstractPaperCommand {
         });
 
         return root.then(arg1).build();
+    }
+
+    @Override
+    public @NotNull final PermissionDefault getPermissionMode() {
+        return PermissionDefault.OP;
+    }
+
+    @Override
+    public @NotNull final List<String> getPermissions() {
+        return List.of("crazylobby.bypass");
     }
 }
