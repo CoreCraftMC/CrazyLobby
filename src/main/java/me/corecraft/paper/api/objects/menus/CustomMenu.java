@@ -11,6 +11,7 @@ import me.corecraft.paper.configs.types.ConfigKeys;
 import me.corecraft.paper.utils.ItemUtils;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class CustomMenu {
 
     private final Gui gui;
 
-    public CustomMenu(final YamlCustomFile customFile) {
+    public CustomMenu(@NotNull final YamlCustomFile customFile) {
         this.fileName = customFile.getFileName();
 
         final CommentedConfigurationNode configuration = customFile.getConfiguration();
@@ -53,7 +54,7 @@ public class CustomMenu {
         this.gui = Gui.gui(this.plugin).disableInteractions().setTitle(this.title).setRows(this.rows).create();
     }
 
-    public void build(final Player player) {
+    public void build(@NotNull final Player player) {
         final String prefix = this.config.getProperty(ConfigKeys.command_prefix);
 
         if (this.isFillerEnabled) {
@@ -80,7 +81,7 @@ public class CustomMenu {
         this.gui.open(player);
     }
 
-    public final String getFileName() {
+    public @NotNull final String getFileName() {
         return this.fileName;
     }
 }

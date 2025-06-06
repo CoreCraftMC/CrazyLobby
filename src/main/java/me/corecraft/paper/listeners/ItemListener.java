@@ -1,8 +1,9 @@
 package me.corecraft.paper.listeners;
 
 import io.papermc.paper.persistence.PersistentDataContainerView;
+import me.corecraft.paper.CrazyLobby;
+import me.corecraft.paper.api.ItemManager;
 import me.corecraft.paper.api.enums.keys.ItemKeys;
-import me.corecraft.paper.api.objects.PaperBase;
 import me.corecraft.paper.api.objects.items.CustomItem;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -13,7 +14,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-public class ItemListener extends PaperBase implements Listener {
+public class ItemListener implements Listener {
+
+    private final CrazyLobby plugin = CrazyLobby.get();
+
+    private final ItemManager itemManager = this.plugin.getItemManager();
 
     @EventHandler()
     public void onPlayerInteract(PlayerInteractEvent event) {

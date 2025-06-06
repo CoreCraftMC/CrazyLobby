@@ -5,16 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
+import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum Permissions {
 
     event_block_interact("event.block.interact", "Ability to place/break blocks", PermissionDefault.OP, true),
-    event_item_drop("event.item.drop", "Ability to drop items", PermissionDefault.OP, true),
+    event_player_pvp("event.player.pvp", "Allows the player to pvp", PermissionDefault.TRUE, false),
     event_item_pickup("event.item.pickup", "Ability to pick up items", PermissionDefault.OP, true),
-
-    event_player_pvp("event.player.pvp", "Allows the player to pvp", PermissionDefault.TRUE, false);
+    event_item_drop("event.item.drop", "Ability to drop items", PermissionDefault.OP, true);
 
     private final String node;
     private final String description;
@@ -27,7 +27,7 @@ public enum Permissions {
 
     private final PluginManager manager = this.plugin.getServer().getPluginManager();
 
-    Permissions(final String node, final String description, final PermissionDefault isDefault, final Map<String, Boolean> children, final boolean register) {
+    Permissions(@NotNull final String node, @NotNull final String description, @NotNull final PermissionDefault isDefault, @NotNull final Map<String, Boolean> children, final boolean register) {
         this.node = node;
         this.description = description;
 
@@ -37,7 +37,7 @@ public enum Permissions {
         this.register = register;
     }
 
-    Permissions(final String node, final String description, final PermissionDefault isDefault, final boolean register) {
+    Permissions(@NotNull final String node, @NotNull final String description, @NotNull final PermissionDefault isDefault, final boolean register) {
         this.node = node;
         this.description = description;
 
@@ -46,7 +46,7 @@ public enum Permissions {
         this.register = register;
     }
 
-    public final String getNode() {
+    public @NotNull final String getNode() {
         return String.format("%s.%s", this.plugin.getName().toLowerCase(), this.node);
     }
 
@@ -54,19 +54,19 @@ public enum Permissions {
         return this.register;
     }
 
-    public final String getDescription() {
+    public @NotNull final String getDescription() {
         return this.description;
     }
 
-    public final PermissionDefault isDefault() {
+    public @NotNull final PermissionDefault isDefault() {
         return this.isDefault;
     }
 
-    public final Map<String, Boolean> getChildren() {
+    public @NotNull final Map<String, Boolean> getChildren() {
         return this.children;
     }
 
-    public final boolean hasPermission(final Player player) {
+    public final boolean hasPermission(@NotNull final Player player) {
         return player.hasPermission(getNode());
     }
 
@@ -74,7 +74,7 @@ public enum Permissions {
         return this.manager.getPermission(getNode()) != null;
     }
 
-    public final Permission getPermission() {
+    public @NotNull final Permission getPermission() {
         return new Permission(getNode(), getDescription(), isDefault());
     }
 

@@ -18,6 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class CustomItem {
 
     private final CustomMenu customMenu;
 
-    public CustomItem(final YamlCustomFile customFile) {
+    public CustomItem(@NotNull final YamlCustomFile customFile) {
         this.fileName = customFile.getFileName();
 
         final CommentedConfigurationNode configuration = customFile.getConfiguration();
@@ -74,7 +75,7 @@ public class CustomItem {
         return this.forceGive;
     }
 
-    public void execute(final Player player) {
+    public void execute(@NotNull final Player player) {
         if (this.customMenu != null) {
             this.customMenu.build(player);
         }
@@ -86,7 +87,7 @@ public class CustomItem {
         sendServer(player);
     }
 
-    public void buildItem(final Player player) {
+    public void buildItem(@NotNull final Player player) {
         final Inventory inventory = player.getInventory();
 
         final ItemBuilder itemBuilder = this.itemBuilder.addPlaceholder("{player}", player.getName());
@@ -102,11 +103,11 @@ public class CustomItem {
         inventory.setItem(this.slot, itemStack);
     }
 
-    public void sendServer(final Player player) {
+    public void sendServer(@NotNull final Player player) {
         MiscUtils.sendServer(player, this.isVelocity, this.server);
     }
 
-    public void executeCommands(final Player player) {
+    public void executeCommands(@NotNull final Player player) {
         if (this.commands.isEmpty()) return;
 
         final String name = player.getName();
@@ -125,7 +126,7 @@ public class CustomItem {
         });
     }
 
-    public void executeMessages(final Player player) {
+    public void executeMessages(@NotNull final Player player) {
         if (this.messages.isEmpty()) return;
 
         final String name = player.getName();
@@ -137,7 +138,7 @@ public class CustomItem {
         }}));
     }
 
-    public void executeSound(final Player player) {
+    public void executeSound(@NotNull final Player player) {
         if (this.sound == null) return;
 
         this.sound.playSound(player, player.getLocation());

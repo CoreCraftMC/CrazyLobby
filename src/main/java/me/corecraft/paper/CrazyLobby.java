@@ -3,13 +3,12 @@ package me.corecraft.paper;
 import com.ryderbelserion.fusion.core.api.plugins.interfacers.IPlugin;
 import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.paper.FusionPaper;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
+import com.ryderbelserion.fusion.paper.api.commands.PaperCommandManager;
 import me.corecraft.paper.api.ItemManager;
 import me.corecraft.paper.api.MenuManager;
 import me.corecraft.paper.api.PaperUserManager;
 import me.corecraft.paper.api.enums.Permissions;
-import me.corecraft.paper.api.objects.PaperHelp;
-import me.corecraft.paper.commands.CommandHandler;
+import me.corecraft.paper.commands.brigadier.BaseCommand;
 import me.corecraft.paper.configs.ConfigManager;
 import me.corecraft.paper.listeners.CacheListener;
 import me.corecraft.paper.listeners.ItemListener;
@@ -26,8 +25,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.incendo.cloud.execution.ExecutionCoordinator;
-import org.incendo.cloud.paper.PaperCommandManager;
 import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 import java.util.List;
@@ -38,14 +35,11 @@ public class CrazyLobby extends JavaPlugin {
         return JavaPlugin.getPlugin(CrazyLobby.class);
     }
 
-    private PaperCommandManager<CommandSourceStack> manager;
     private PaperUserManager userManager;
     private FileManager fileManager;
     private ItemManager itemManager;
     private MenuManager menuManager;
     private FusionPaper api;
-
-    private PaperHelp help;
 
     @Override
     public void onEnable() {
@@ -111,14 +105,9 @@ public class CrazyLobby extends JavaPlugin {
                 new ItemListener()
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
 
-        this.manager = PaperCommandManager.builder()
-                .executionCoordinator(ExecutionCoordinator.simpleCoordinator())
-                .buildOnEnable(this);
+        final PaperCommandManager commandManager = this.api.getCommandManager();
 
-        this.help = new PaperHelp();
-        this.help.init();
-
-        new CommandHandler(this.manager);
+        commandManager.enable(new BaseCommand());
     }
 
     @Override
@@ -167,31 +156,23 @@ public class CrazyLobby extends JavaPlugin {
         server.getAsyncScheduler().cancelTasks(this);
     }
 
-    public final PaperCommandManager<CommandSourceStack> getManager() {
-        return this.manager;
-    }
-
-    public final PaperUserManager getUserManager() {
+    public @NotNull final PaperUserManager getUserManager() {
         return this.userManager;
     }
 
-    public final FileManager getFileManager() {
+    public @NotNull final FileManager getFileManager() {
         return this.fileManager;
     }
 
-    public final MenuManager getMenuManager() {
+    public @NotNull final MenuManager getMenuManager() {
         return this.menuManager;
     }
 
-    public final ItemManager getItemManager() {
+    public @NotNull final ItemManager getItemManager() {
         return this.itemManager;
     }
 
-    public final FusionPaper getApi() {
+    public @NotNull final FusionPaper getApi() {
         return this.api;
-    }
-
-    public final PaperHelp getHelp() {
-        return this.help;
     }
 }

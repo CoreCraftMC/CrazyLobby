@@ -3,6 +3,7 @@ package me.corecraft.paper.utils;
 import com.ryderbelserion.fusion.core.api.exceptions.FusionException;
 import com.ryderbelserion.fusion.paper.api.builders.items.ItemBuilder;
 import com.ryderbelserion.fusion.paper.api.builders.items.types.SkullBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ItemUtils {
 
-    public static ItemBuilder getBuilder(final CommentedConfigurationNode child) {
+    public static ItemBuilder getBuilder(@NotNull final CommentedConfigurationNode child) {
         final ItemBuilder itemBuilder = ItemBuilder.from(child.node("type").getString("stone"));
 
         final String itemName = child.node("name").getString("");

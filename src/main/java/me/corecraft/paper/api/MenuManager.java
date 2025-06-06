@@ -35,11 +35,11 @@ public class MenuManager {
         });
     }
 
-    public final CustomMenu getCustomMenu(@NotNull final String name) {
+    public @NotNull final CustomMenu getCustomMenu(@NotNull final String name) {
         return this.customMenus.get(name);
     }
 
-    public final Map<String, CustomMenu> getCustomMenus() {
+    public @NotNull final Map<String, CustomMenu> getCustomMenus() {
         return Collections.unmodifiableMap(this.customMenus);
     }
 }

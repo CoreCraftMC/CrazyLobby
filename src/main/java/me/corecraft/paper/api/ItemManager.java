@@ -50,11 +50,11 @@ public class ItemManager {
         });
     }
 
-    public final CustomItem getCustomItem(@NotNull final String name) {
+    public @NotNull final CustomItem getCustomItem(@NotNull final String name) {
         return this.customItems.get(name);
     }
 
-    public final Map<String, CustomItem> getCustomItems() {
+    public @NotNull final Map<String, CustomItem> getCustomItems() {
         return Collections.unmodifiableMap(this.customItems);
     }
 }

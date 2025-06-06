@@ -7,6 +7,7 @@ import me.corecraft.paper.utils.ItemUtils;
 import me.corecraft.paper.utils.MiscUtils;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class CustomButton {
 
     private final int slot;
 
-    public CustomButton(final CommentedConfigurationNode child) {
+    public CustomButton(@NotNull final CommentedConfigurationNode child) {
         this.itemBuilder = ItemUtils.getBuilder(child);
 
         this.slot = child.node("slot").getInt(-1);
@@ -57,25 +58,25 @@ public class CustomButton {
         this.customSound = new CustomSound(child.node("sound"), Sound.Source.MASTER);
     }
 
-    public final ItemBuilder getItemBuilder() {
+    public @NotNull final ItemBuilder getItemBuilder() {
         return this.itemBuilder;
     }
 
-    public void sendServer(final Player player) {
+    public void sendServer(@NotNull final Player player) {
         MiscUtils.sendServer(player, this.isVelocity, this.server);
     }
 
-    public void executeSound(final Player player) {
+    public void executeSound(@NotNull final Player player) {
         if (this.customSound == null) return;
 
         this.customSound.playSound(player);
     }
 
-    public final List<String> getCommands() {
+    public @NotNull final List<String> getCommands() {
         return this.commands;
     }
 
-    public final List<String> getMessages() {
+    public @NotNull final List<String> getMessages() {
         return this.messages;
     }
 

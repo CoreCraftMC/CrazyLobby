@@ -5,7 +5,6 @@ import ch.jalu.configme.SettingsHolder;
 import ch.jalu.configme.configurationdata.CommentsConfiguration;
 import ch.jalu.configme.properties.Property;
 import me.corecraft.api.enums.Action;
-import me.corecraft.paper.configs.objects.help.HelpProperty;
 import org.jetbrains.annotations.NotNull;
 import static ch.jalu.configme.properties.PropertyInitializer.newBeanProperty;
 import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
@@ -15,12 +14,9 @@ public class ConfigKeys implements SettingsHolder {
     protected ConfigKeys() {}
 
     @Override
-    public void registerComments(@NotNull CommentsConfiguration configuration) {
+    public void registerComments(@NotNull final CommentsConfiguration configuration) {
         configuration.setComment("root", "The root config section");
     }
-
-    @Comment("Settings related to /crazylobby help")
-    public static final Property<HelpProperty> help_property = newBeanProperty(HelpProperty.class, "root.help", new HelpProperty());
 
     @Comment("The prefix that appears in front of commands!")
     public static final Property<String> command_prefix = newProperty("root.prefix", "<dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>");

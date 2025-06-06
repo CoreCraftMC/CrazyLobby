@@ -10,6 +10,7 @@ import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class MiscUtils {
 
@@ -17,19 +18,19 @@ public class MiscUtils {
 
     private static final ComponentLogger logger = plugin.getComponentLogger();
 
-    public static void play(final Player player, final Location location, final String sound, double volume, float pitch, Sound.Source source) {
+    public static void play(@NotNull final Player player, @NotNull final Location location, @NotNull final String sound, final double volume, final float pitch, @NotNull final Sound.Source source) {
         new CustomSound(sound.isEmpty(), sound, volume, pitch, source).playSound(player, location);
     }
 
-    public static void play(final Player player, final Location location, final SoundProperty property, final Sound.Source source) {
+    public static void play(@NotNull final Player player, @NotNull final Location location, @NotNull final SoundProperty property, @NotNull final Sound.Source source) {
         play(player, location, property.value, property.volume, property.pitch, source);
     }
 
-    public static void play(final Player player, final String sound, double volume, float pitch, Sound.Source source) {
+    public static void play(@NotNull final Player player, @NotNull final String sound, final double volume, final float pitch, @NotNull final Sound.Source source) {
         play(player, player.getLocation(), sound, volume, pitch, source);
     }
 
-    public static void sendServer(final Player player, final boolean isVelocity, final String server) {
+    public static void sendServer(@NotNull final Player player, final boolean isVelocity, @NotNull final String server) {
         if (!isVelocity || server.isEmpty()) return;
 
         try {

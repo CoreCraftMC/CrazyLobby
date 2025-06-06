@@ -2,24 +2,6 @@
 root:
   # The prefix that appears in front of commands!
   prefix: <dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>
-  # Settings related to /crazylobby help
-  help:
-    # The amount of commands to show per page.
-    results-per-page: 10
-    # The colors used to stylize /crazylobby help.
-    colors:
-      # The primary color for the color scheme.
-      primary-color: "255,170,0"
-      # The highlight colors.
-      highlight:
-        # The primary color used to highlight commands and queries.
-        color: "85,255,85"
-        # The secondary color used to highlight commands and queries.
-        alternative: "255,255,85"
-      # The color used for description text.
-      text-color: "170,170,170"
-      # The color used for accents and symbols.
-      accent-color: "170,170,170"
   # This option will tell the plugin to send all messages as action bars or messages in chat.
   #
   # send_message -> sends messages in chat.

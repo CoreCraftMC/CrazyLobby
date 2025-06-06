@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class DamageListener implements Listener {
 
@@ -68,7 +69,7 @@ public class DamageListener implements Listener {
         }
     }
 
-    private void teleport(final Player player) {
+    private void teleport(@NotNull final Player player) {
         player.setFallDistance(0.0F);
 
         new FoliaScheduler(this.plugin, Scheduler.global_scheduler) {

@@ -16,15 +16,15 @@ public enum BypassType {
         this.chat = chat;
     }
 
-    public final String getPrettyName() {
+    public @NotNull final String getPrettyName() {
         return StringUtils.capitalize(getName().replace("_", " "));
     }
 
-    public final String getName() {
+    public @NotNull final String getName() {
         return this.chat;
     }
 
-    public static BypassType getBypassType(@NotNull final String value) {
+    public static @NotNull BypassType getBypassType(@NotNull final String value) {
         BypassType type = BypassType.no_bypass;
 
         if (value.isEmpty()) {

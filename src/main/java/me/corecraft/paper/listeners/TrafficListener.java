@@ -1,6 +1,7 @@
 package me.corecraft.paper.listeners;
 
-import me.corecraft.paper.api.objects.PaperBase;
+import me.corecraft.paper.CrazyLobby;
+import me.corecraft.paper.api.ItemManager;
 import me.corecraft.paper.api.objects.items.CustomItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,7 +10,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import java.util.Map;
 
-public class TrafficListener extends PaperBase implements Listener {
+public class TrafficListener implements Listener {
+
+    private final CrazyLobby plugin = CrazyLobby.get();
+
+    private final ItemManager itemManager = this.plugin.getItemManager();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

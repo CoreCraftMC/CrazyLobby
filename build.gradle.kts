@@ -26,7 +26,6 @@ repositories {
 dependencies {
     paperweight.paperDevBundle(libs.versions.paper.get())
 
-    compileOnly(libs.bundles.cloud.paper)
     compileOnly(libs.fusion.paper)
 
     implementation(project(":api"))

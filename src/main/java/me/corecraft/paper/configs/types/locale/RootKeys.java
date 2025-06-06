@@ -12,7 +12,7 @@ public class RootKeys implements SettingsHolder {
     protected RootKeys() {}
 
     @Override
-    public void registerComments(@NotNull CommentsConfiguration configuration) {
+    public void registerComments(@NotNull final CommentsConfiguration configuration) {
         configuration.setComment("root", """
                 The root locale section which powers the entire plugin's translation system!
                 

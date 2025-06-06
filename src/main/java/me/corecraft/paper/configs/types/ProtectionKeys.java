@@ -14,12 +14,12 @@ import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
 public class ProtectionKeys implements SettingsHolder {
 
     @Override
-    public void registerComments(@NotNull CommentsConfiguration conf) {
-        conf.setComment("protection", "Prevents players from wreaking havoc in your lobby!");
+    public void registerComments(@NotNull final CommentsConfiguration configuration) {
+        configuration.setComment("protection", "Prevents players from wreaking havoc in your lobby!");
 
-        conf.setComment("protection.block", "Block interaction protections");
+        configuration.setComment("protection.block", "Block interaction protections");
 
-        conf.setComment("protection.block.prevent-interaction", "Section related to prevent block interactions.");
+        configuration.setComment("protection.block.prevent-interaction", "Section related to prevent block interactions.");
     }
 
     @Comment({

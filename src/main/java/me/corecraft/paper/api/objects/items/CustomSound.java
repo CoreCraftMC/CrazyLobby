@@ -24,17 +24,17 @@ public class CustomSound {
                 node.node("pitch").getFloat(1.0f), source);
     }
 
-    public void playSound(final Player player, final Location location) {
+    public void playSound(@NotNull final Player player, @NotNull final Location location) {
         if (!this.isEnabled || this.sound == null) return;
 
         player.playSound(this.sound, location.x(), location.y(), location.z());
     }
 
-    public void playSound(final Player player) {
+    public void playSound(@NotNull final Player player) {
         playSound(player, player.getLocation());
     }
 
-    public void stopSound(final Player player) {
+    public void stopSound(@NotNull final Player player) {
         player.stopSound(this.sound);
     }
 }
