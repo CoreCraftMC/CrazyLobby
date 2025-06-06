@@ -39,6 +39,8 @@ public class ItemManager {
 
                 if (!isStartup) {
                     for (final Player player : players) {
+                        player.getInventory().clear(); // clear inventory
+
                         if (item.isForceGive()) {
                             item.buildItem(player);
                         }
