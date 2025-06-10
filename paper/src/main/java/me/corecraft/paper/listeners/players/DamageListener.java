@@ -72,7 +72,7 @@ public class DamageListener implements Listener {
 
         final EntityDamageEvent.DamageCause cause = event.getCause();
 
-        if (user.isCombatEnabled) { // return as they should take all forms of damage.
+        if (user.isCombatEnabled && Permissions.event_player_pvp.hasPermission(player)) { // return as they should take all forms of damage.
             return;
         }
 
