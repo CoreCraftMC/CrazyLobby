@@ -38,8 +38,6 @@ public class InteractionListener implements Listener {
         this.userRegistry = platform.getUserRegistry();
     }
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
@@ -48,7 +46,9 @@ public class InteractionListener implements Listener {
 
         if (block.getType().isAir()) return;
 
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
 
         final User user = this.userRegistry.getUser(player);
 
@@ -56,7 +56,7 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        new CustomSound(this.config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
+        new CustomSound(config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
 
         event.setCancelled(true);
     }
@@ -69,7 +69,9 @@ public class InteractionListener implements Listener {
 
         if (block.getType().isAir()) return;
 
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
 
         final User user = this.userRegistry.getUser(player);
 
@@ -77,7 +79,7 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        new CustomSound(this.config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
+        new CustomSound(config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
 
         event.setCancelled(true);
     }
@@ -90,7 +92,9 @@ public class InteractionListener implements Listener {
 
         if (block == null || block.getType().isAir()) return;
 
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
 
         final User user = this.userRegistry.getUser(player);
 
@@ -101,7 +105,7 @@ public class InteractionListener implements Listener {
         final Material material = block.getType();
 
         // if the material is in this list, consider it a non-destructive item
-        if (getStringList(this.config).contains(material.getKey().getKey().toLowerCase())) {
+        if (getStringList(config.node("root", "protection", "block", "interactable-items")).contains(material.getKey().getKey().toLowerCase())) {
             return;
         }
 
@@ -110,9 +114,13 @@ public class InteractionListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onItemFrameDamage(EntityDamageByEntityEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || !(event.getEntity() instanceof ItemFrame)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
 
-        if (event.getDamager() instanceof Player player) {
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || !(event.getEntity() instanceof ItemFrame)) return;
+
+        final Entity damager = event.getDamager();
+
+        if (damager instanceof Player player) {
             if (Permissions.event_block_interact.hasPermission(player)) return;
 
             final User user = this.userRegistry.getUser(player);
@@ -122,8 +130,8 @@ public class InteractionListener implements Listener {
             }
         }
 
-        if (event.getDamager() instanceof Projectile) {
-            event.getDamager().remove();
+        if (damager instanceof Projectile) {
+            damager.remove();
         }
 
         event.setCancelled(true);
@@ -131,7 +139,9 @@ public class InteractionListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onItemFrameInteract(PlayerInteractEntityEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || !(event.getRightClicked() instanceof ItemFrame)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || !(event.getRightClicked() instanceof ItemFrame)) return;
 
         final Player player = event.getPlayer();
 
@@ -143,12 +153,16 @@ public class InteractionListener implements Listener {
             return;
         }
 
+        new CustomSound(config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
+
         event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onHangingEntityDestroy(HangingBreakByEntityEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true)) return;
 
         final Entity entity = event.getEntity();
 
@@ -162,7 +176,7 @@ public class InteractionListener implements Listener {
             return;
         }
 
-        new CustomSound(this.config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
+        new CustomSound(config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
 
         event.setCancelled(true);
     }

@@ -16,8 +16,10 @@ import me.corecraft.paper.listeners.players.PlayerListener;
 import me.corecraft.paper.listeners.protection.DecayListener;
 import me.corecraft.paper.listeners.protection.MiscListener;
 import me.corecraft.paper.listeners.protection.MobListener;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
@@ -132,6 +134,11 @@ public class CrazyLobbyPlatform extends CrazyLobby {
     @Override
     public void broadcast(@NotNull Component component) {
         broadcast(component, "");
+    }
+
+    @Override
+    public final boolean isConsoleSender(@NotNull final Audience audience) {
+        return audience instanceof ConsoleCommandSender;
     }
 
     public @NotNull final MenuManager getMenuManager() {

@@ -11,25 +11,29 @@ import org.spongepowered.configurate.CommentedConfigurationNode;
 
 public class DecayListener implements Listener {
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBurn(BlockBurnEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-block-burn").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-block-burn").getBoolean(true)) return;
 
         event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockIgnite(BlockIgniteEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-fire-spread").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-fire-spread").getBoolean(true)) return;
 
         if (event.getCause() == BlockIgniteEvent.IgniteCause.SPREAD) event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onLeafDecay(LeavesDecayEvent event) {
-        if (!this.config.node("root", "protection", "block", "prevent-leaf-decay").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-leaf-decay").getBoolean(true)) return;
 
         event.setCancelled(true);
     }

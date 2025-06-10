@@ -22,6 +22,7 @@ public class Message implements IMessage {
     private final FusionKyori kyori = (FusionKyori) FusionCore.Provider.get();
 
     private final CommentedConfigurationNode config = Files.config.getConfig();
+    private final CommentedConfigurationNode messages = Files.messages.getConfig();
 
     private final UserRegistry userRegistry;
     private final CrazyLobby instance;
@@ -71,6 +72,12 @@ public class Message implements IMessage {
 
     @Override
     public Component getComponent(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
+        if (this.instance.isConsoleSender(audience)) {
+            final CommentedConfigurationNode config = this.messages.node(this.path);
+
+            return parse(config.isList() ? StringUtils.toString(getStringList(config)) : config.getString(this.defaultValue), audience, placeholders);
+        }
+
         final User user = this.userRegistry.getUser(audience);
 
         final CommentedConfigurationNode node = user.locale().node(this.path);

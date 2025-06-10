@@ -9,11 +9,11 @@ import org.spongepowered.configurate.CommentedConfigurationNode;
 
 public class MiscListener implements Listener {
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onWeatherChange(WeatherChangeEvent event) {
-        if (!this.config.node("root", "protection", "prevent-weather-change").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "prevent-weather-change").getBoolean(true)) return;
 
         event.setCancelled(event.toWeatherState());
     }

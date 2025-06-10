@@ -79,6 +79,8 @@ root:
       - "trapped_chest"
       # Prevent leaf decay, if this is set to true.
       prevent-leaf-decay: true
+      # Prevents entities from exploding, if this is set to true.
+      prevent-entity-explosion: true
       # Prevents fire from spreading, if this is set to true.
       prevent-fire-spread: true
       # Prevents blocks from burning, if this is set to true.
@@ -100,3 +102,5 @@ root:
     prevent-all-damage: true
     # Prevents weather changing, if this is set to true.
     prevent-weather-change: true
+    # Prevents all damage to mobs, if this is set to true.
+    prevent-mob-damage: true

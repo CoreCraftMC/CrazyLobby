@@ -6,6 +6,7 @@ import com.ryderbelserion.fusion.core.files.FileType;
 import me.corecraft.api.interfaces.platform.ICrazyLobby;
 import me.corecraft.common.registry.MessageRegistry;
 import me.corecraft.common.registry.UserRegistry;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
@@ -27,6 +28,8 @@ public abstract class CrazyLobby implements ICrazyLobby {
     public abstract void broadcast(@NotNull final Component component, @NotNull final String permission);
 
     public abstract void broadcast(@NotNull final Component component);
+
+    public abstract boolean isConsoleSender(@NotNull final Audience audience);
 
     @Override
     public void start() {

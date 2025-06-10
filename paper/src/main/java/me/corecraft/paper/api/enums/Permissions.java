@@ -12,7 +12,7 @@ import java.util.Map;
 public enum Permissions {
 
     event_block_interact("event.block.interact", "Ability to place/break blocks", PermissionDefault.OP, true),
-    event_player_pvp("event.player.pvp", "Allows the player to pvp", PermissionDefault.TRUE, false),
+    event_player_pvp("event.player.pvp", "Allows the player to pvp", PermissionDefault.OP, false),
     event_item_pickup("event.item.pickup", "Ability to pick up items", PermissionDefault.OP, true),
     event_item_drop("event.item.drop", "Ability to drop items", PermissionDefault.OP, true);
 

@@ -50,10 +50,10 @@ public class CustomMenu {
         this.gui = Gui.gui(platform.getPlugin()).disableInteractions().setTitle(this.title).setRows(this.rows).create();
     }
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     public void build(@NotNull final Player player) {
-        final String prefix = this.config.node("root", "prefix").getString("<dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>");
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        final String prefix = config.node("root", "prefix").getString("<dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>");
 
         if (this.isFillerEnabled) {
             this.gui.getFiller().fill(this.fillerItem.asGuiItem(player));

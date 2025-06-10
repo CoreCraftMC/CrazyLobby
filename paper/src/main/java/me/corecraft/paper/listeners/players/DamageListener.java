@@ -8,6 +8,7 @@ import me.corecraft.common.registry.UserRegistry;
 import me.corecraft.paper.CrazyLobbyPlatform;
 import me.corecraft.paper.CrazyLobbyPlugin;
 import me.corecraft.paper.api.enums.Permissions;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,8 +29,6 @@ public class DamageListener implements Listener {
         this.plugin = platform.getPlugin();
     }
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player receiver) || !(event.getDamager() instanceof Player sender)) return;
@@ -45,7 +44,28 @@ public class DamageListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onEntityDamage(EntityDamageEvent event) {
+    public void onMobDamage(EntityDamageByEntityEvent event) { //todo() might be entirely pointless lol
+        if (!(event instanceof LivingEntity)) return;
+
+        if (event instanceof Player player) {
+            final User user = this.userRegistry.getUser(player);
+
+            if (user.isCombatEnabled && Permissions.event_player_pvp.hasPermission(player)) {
+                return;
+            }
+        }
+
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "prevent-mob-damage").getBoolean(true)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
 
         final User user = this.userRegistry.getUser(player);
@@ -56,7 +76,9 @@ public class DamageListener implements Listener {
             return;
         }
 
-        if (this.config.node("root", "protection", "prevent-all-damage").getBoolean(true)) {
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (config.node("root", "protection", "prevent-all-damage").getBoolean(true)) {
             if (cause == EntityDamageEvent.DamageCause.VOID) {
                 teleport(player);
             }
@@ -66,7 +88,7 @@ public class DamageListener implements Listener {
             return;
         }
 
-        if (cause == EntityDamageEvent.DamageCause.VOID && this.config.node("root", "protection", "prevent-void-damage").getBoolean(true)) {
+        if (cause == EntityDamageEvent.DamageCause.VOID && config.node("root", "protection", "prevent-void-damage").getBoolean(true)) {
             teleport(player);
 
             event.setCancelled(true);

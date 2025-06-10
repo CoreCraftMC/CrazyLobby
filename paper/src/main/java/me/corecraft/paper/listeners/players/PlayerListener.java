@@ -1,6 +1,5 @@
 package me.corecraft.paper.listeners.players;
 
-import io.papermc.paper.event.player.PlayerPickItemEvent;
 import me.corecraft.common.enums.Files;
 import me.corecraft.common.objects.User;
 import me.corecraft.common.registry.UserRegistry;
@@ -13,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
@@ -25,13 +25,13 @@ public class PlayerListener implements Listener {
         this.userRegistry = platform.getUserRegistry();
     }
 
-    private final CommentedConfigurationNode config = Files.config.getConfig();
-
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlayerPickupEvent(PlayerPickItemEvent event) {
+    public void onPlayerPickupEvent(PlayerAttemptPickupItemEvent event) {
         final Player player = event.getPlayer();
 
-        if (!this.config.node("root", "protection", "item", "prevent-pickup").getBoolean(true) || Permissions.event_item_pickup.hasPermission(player)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "item", "prevent-pickup").getBoolean(true) || Permissions.event_item_pickup.hasPermission(player)) return;
 
         final User user = this.userRegistry.getUser(player);
 
@@ -46,7 +46,9 @@ public class PlayerListener implements Listener {
     public void onPlayerFoodChange(FoodLevelChangeEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 
-        if (!this.config.node("root", "protection", "prevent-hunger-change").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "prevent-hunger-change").getBoolean(true)) return;
 
         event.setCancelled(true);
     }
@@ -55,7 +57,9 @@ public class PlayerListener implements Listener {
     public void onPlayerDropEvent(PlayerDropItemEvent event) {
         final Player player = event.getPlayer();
 
-        if (!this.config.node("root", "protection", "item", "prevent-drop").getBoolean(true) || Permissions.event_item_drop.hasPermission(player)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "item", "prevent-drop").getBoolean(true) || Permissions.event_item_drop.hasPermission(player)) return;
 
         final User user = this.userRegistry.getUser(player);
 
@@ -68,7 +72,9 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (!this.config.node("root", "protection", "prevent-death-message").getBoolean(true)) return;
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "prevent-death-message").getBoolean(true)) return;
 
         event.deathMessage(null);
     }
