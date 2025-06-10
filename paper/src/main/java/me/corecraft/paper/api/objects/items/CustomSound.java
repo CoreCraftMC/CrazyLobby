@@ -2,7 +2,6 @@ package me.corecraft.paper.api.objects.items;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -17,8 +16,6 @@ public class CustomSound {
         this.isEnabled = isEnabled || sound.isEmpty();
 
         this.sound = this.isEnabled ? Sound.sound(Key.key(sound), source, (float) volume, pitch) : null;
-
-        Bukkit.getLogger().warning("Enabled: " + isEnabled);
     }
 
     public CustomSound(@NotNull final CommentedConfigurationNode config, @NotNull final Sound.Source source) {
