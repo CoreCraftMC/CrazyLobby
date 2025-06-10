@@ -29,6 +29,27 @@ public class DamageListener implements Listener {
         this.plugin = platform.getPlugin();
     }
 
+    @EventHandler(ignoreCancelled = true)
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "prevent-mob-damage").getBoolean(true)) {
+            return;
+        }
+
+        if (event.getEntity() instanceof Player player) {
+            final User user = this.userRegistry.getUser(player);
+
+            if (user.isCombatEnabled && Permissions.event_player_pvp.hasPermission(player)) {
+                return;
+            }
+        }
+
+        event.setCancelled(true);
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player receiver) || !(event.getDamager() instanceof Player sender)) return;
@@ -39,27 +60,6 @@ public class DamageListener implements Listener {
         final User damager = this.userRegistry.getUser(sender);
 
         if (target.isCombatEnabled && damager.isCombatEnabled) return;
-
-        event.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onMobDamage(EntityDamageByEntityEvent event) { //todo() might be entirely pointless lol
-        if (!(event instanceof LivingEntity)) return;
-
-        if (event instanceof Player player) {
-            final User user = this.userRegistry.getUser(player);
-
-            if (user.isCombatEnabled && Permissions.event_player_pvp.hasPermission(player)) {
-                return;
-            }
-        }
-
-        final CommentedConfigurationNode config = Files.config.getConfig();
-
-        if (!config.node("root", "protection", "prevent-mob-damage").getBoolean(true)) {
-            return;
-        }
 
         event.setCancelled(true);
     }
