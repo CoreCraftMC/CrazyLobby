@@ -19,6 +19,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -36,6 +37,34 @@ public class InteractionListener implements Listener {
 
     public InteractionListener(@NotNull final CrazyLobbyPlatform platform) {
         this.userRegistry = platform.getUserRegistry();
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onBlockInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+
+        final Block block = event.getClickedBlock();
+
+        if (block == null || block.getType().isAir()) return;
+
+        final CommentedConfigurationNode config = Files.config.getConfig();
+
+        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
+
+        final User user = this.userRegistry.getUser(player);
+
+        if (user.activeBypassTypes.contains(BypassType.allow_block_interact.getName())) {
+            return;
+        }
+
+        final Material material = block.getType();
+
+        // if the material is in this list and is right-clicked, consider it a non-destructive item
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && getStringList(config.node("root", "protection", "block", "interactable-items")).contains(material.getKey().getKey().toLowerCase())) {
+            return;
+        }
+
+        event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -80,34 +109,6 @@ public class InteractionListener implements Listener {
         }
 
         new CustomSound(config.node("root", "protection", "block", "prevent-interaction", "sound"), Sound.Source.PLAYER).playSound(player);
-
-        event.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onBlockInteract(PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
-
-        final Block block = event.getClickedBlock();
-
-        if (block == null || block.getType().isAir()) return;
-
-        final CommentedConfigurationNode config = Files.config.getConfig();
-
-        if (!config.node("root", "protection", "block", "prevent-interaction", "toggle").getBoolean(true) || Permissions.event_block_interact.hasPermission(player)) return;
-
-        final User user = this.userRegistry.getUser(player);
-
-        if (user.activeBypassTypes.contains(BypassType.allow_block_interact.getName())) {
-            return;
-        }
-
-        final Material material = block.getType();
-
-        // if the material is in this list, consider it a non-destructive item
-        if (getStringList(config.node("root", "protection", "block", "interactable-items")).contains(material.getKey().getKey().toLowerCase())) {
-            return;
-        }
 
         event.setCancelled(true);
     }
