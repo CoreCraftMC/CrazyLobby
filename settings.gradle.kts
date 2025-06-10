@@ -1,3 +1,3 @@
 rootProject.name = "CrazyLobby"
 
-include("api")
+include("common", "paper", "api")

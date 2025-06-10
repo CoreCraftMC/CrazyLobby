@@ -1,82 +1,40 @@
 plugins {
-    alias(libs.plugins.paperweight)
-    alias(libs.plugins.runPaper)
-    alias(libs.plugins.shadow)
-
-    `java-library`
+    `config-java`
 }
 
 rootProject.description = "The lobby plugin for play.corecraft.me!"
 rootProject.version = "1.0.0"
-rootProject.group = "me.corecraft.paper"
+rootProject.group = "me.corecraft"
 
-repositories {
-    maven("https://repo.papermc.io/repository/maven-public")
-
-    maven("https://repo.codemc.io/repository/maven-public")
-
-    maven("https://repo.crazycrew.us/libraries")
-    maven("https://repo.crazycrew.us/releases")
-
-    maven("https://jitpack.io")
-
-    mavenCentral()
-}
-
-dependencies {
-    paperweight.paperDevBundle(libs.versions.paper.get())
-
-    implementation(libs.fusion.paper)
-
-    implementation(project(":api"))
-}
-
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
-
-    withSourcesJar()
-    withJavadocJar()
+allprojects {
+    apply(plugin = "java-library")
 }
 
 tasks {
-    runServer {
-        jvmArgs("-Dnet.kyori.ansi.colorLevel=truecolor")
+    withType<Jar> {
+        subprojects {
+            dependsOn(project.tasks.build)
+        }
 
-        defaultCharacterEncoding = Charsets.UTF_8.name()
+        // get subproject's built jars
+        val jars = subprojects.map { zipTree(it.tasks.jar.get().archiveFile.get().asFile) }
 
-        minecraftVersion(libs.versions.minecraft.get())
-    }
+        // merge them into main jar (except their manifests)
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    processResources {
-        inputs.properties(
-            "name" to rootProject.name,
-            "version" to rootProject.version,
-            "description" to rootProject.description,
-            "minecraft" to libs.versions.minecraft.get(),
-            "group" to rootProject.group
-        )
+        from(jars) {
+            exclude("META-INF/MANIFEST.MF")
+        }
 
-        with(copySpec {
-            from("src/main/resources/paper-plugin.yml") {
-                expand(inputs.properties)
+        // put behind an action because files don't exist at configuration time
+        doFirst {
+            // merge all subproject's manifests into main manifest
+            jars.forEach { jar ->
+                jar.matching { include("META-INF/MANIFEST.MF") }
+                    .files.forEach { file ->
+                        manifest.from(file)
+                    }
             }
-        })
-    }
-
-    shadowJar {
-        archiveClassifier.set("")
-
-        exclude("META-INF/**")
-    }
-
-    processResources {
-        filteringCharset = Charsets.UTF_8.name()
-
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    }
-
-    compileJava {
-        options.encoding = Charsets.UTF_8.name()
-        options.release.set(21)
+        }
     }
 }

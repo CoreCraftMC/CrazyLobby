@@ -1,0 +1,102 @@
+# The root config section
+root:
+  # The prefix that appears in front of commands!
+  prefix: "<dark_gray>[<red>Core<white>Craft<dark_gray>] <reset>"
+  # This option will tell the plugin to send all messages as action bars or messages in chat.
+  #
+  # send_message -> sends messages in chat.
+  # send_actionbar -> sends messages in actionbar.
+  #
+  message-action: "send_message"
+  # Prevents players from wreaking havoc in your lobby!
+  protection:
+    # Block interaction protections
+    block:
+      # Section related to prevent block interactions
+      prevent-interaction:
+        # A list of sounds: https://minecraft.wiki/w/Sounds.json
+        #
+        # Handles the sound to play, when a player cannot build, volume/pitch control, and Custom Sounds are supported!
+        sound:
+          # Should a sound be played?
+          toggle: true
+          # The sound to play.
+          type: "entity.villager.no"
+          # The volume of the sound.
+          volume: 1.0
+          # The pitch of the sound.
+          pitch: 1.0
+        # Prevents a player from building, if this is set to true.
+        toggle: true
+      # A list of blocks that can be interacted with.
+      interactable-items:
+      - "oak_door"
+      - "acacia_door"
+      - "birch_door"
+      - "dark_oak_door"
+      - "spruce_door"
+      - "jungle_door"
+      - "oak_fence_gate"
+      - "acacia_fence_gate"
+      - "birch_fence_gate"
+      - "dark_oak_fence_gate"
+      - "spruce_fence_gate"
+      - "jungle_fence_gate"
+      - "oak_trapdoor"
+      - "acacia_trapdoor"
+      - "birch_trapdoor"
+      - "dark_oak_trapdoor"
+      - "spruce_trapdoor"
+      - "jungle_trapdoor"
+      - "oak_sign"
+      - "acacia_sign"
+      - "birch_sign"
+      - "dark_oak_sign"
+      - "spruce_sign"
+      - "jungle_sign"
+      - "oak_button"
+      - "acacia_button"
+      - "birch_button"
+      - "dark_oak_button"
+      - "jungle_button"
+      - "anvil"
+      - "beacon"
+      - "red_bed"
+      - "daylight_detector"
+      - "dispenser"
+      - "hopper"
+      - "dropper"
+      - "enchanting_table"
+      - "furnace"
+      - "chest_minecart"
+      - "hopper_minecart"
+      - "minecart"
+      - "lever"
+      - "note_block"
+      - "comparator"
+      - "chest"
+      - "ender_chest"
+      - "trapped_chest"
+      # Prevent leaf decay, if this is set to true.
+      prevent-leaf-decay: true
+      # Prevents fire from spreading, if this is set to true.
+      prevent-fire-spread: true
+      # Prevents blocks from burning, if this is set to true.
+      prevent-block-burn: true
+      # Prevents mobs from spawning, if this is set to true.
+      prevent-mob-spawning: true
+    item:
+      # Prevents a player from picking up items, if this is set to true.
+      prevent-pickup: true
+      # Prevents a player from dropping items, if this is set to true.
+      prevent-drop: true
+    # Prevents a player from loosing hunger, if this is set to true.
+    prevent-hunger-change: true
+    # Prevents a death mess if a player dies, if this is set to true.
+    prevent-death-message: true
+    # Prevents void damage, if this is set to true.
+    prevent-void-damage: true
+    # Prevents all damage, if this is set to true.
+    prevent-all-damage: true
+    # Prevents weather changing, if this is set to true.
+    prevent-weather-change: true

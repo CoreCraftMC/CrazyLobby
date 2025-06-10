@@ -1,0 +1,23 @@
+name: '${name}'
+main: '${group}.CrazyLobbyPlugin'
+
+version: '${version}'
+api-version: '${minecraft}'
+description: '${description}'
+
+folia-supported: true
+
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    HeadDatabase:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    Nexo:
+      load: BEFORE
+      required: false
+      join-classpath: true
