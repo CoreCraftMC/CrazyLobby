@@ -13,6 +13,8 @@ public class CrazyLobbyPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord"); // register bungee channel
+
         this.platform = new CrazyLobbyPlatform(this, new FusionPaper(getComponentLogger(), getDataPath()));
         this.platform.start();
     }
