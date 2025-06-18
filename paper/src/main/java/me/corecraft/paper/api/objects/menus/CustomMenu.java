@@ -4,10 +4,14 @@ import com.ryderbelserion.fusion.core.files.types.YamlCustomFile;
 import com.ryderbelserion.fusion.paper.FusionPaper;
 import com.ryderbelserion.fusion.paper.api.builders.gui.interfaces.Gui;
 import com.ryderbelserion.fusion.paper.api.builders.items.ItemBuilder;
+import com.ryderbelserion.fusion.paper.api.enums.Scheduler;
+import com.ryderbelserion.fusion.paper.api.scheduler.FoliaScheduler;
 import me.corecraft.common.enums.Files;
 import me.corecraft.paper.CrazyLobbyPlatform;
+import me.corecraft.paper.CrazyLobbyPlugin;
 import me.corecraft.paper.utils.ItemUtils;
 import org.bukkit.Server;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
@@ -17,6 +21,9 @@ import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class CustomMenu {
+
+    private final CrazyLobbyPlugin plugin;
+    private final Server server;
 
     private final FusionPaper fusion;
 
@@ -33,6 +40,9 @@ public class CustomMenu {
     private final Gui gui;
 
     public CustomMenu(@NotNull final CrazyLobbyPlatform platform, @NotNull final YamlCustomFile customFile) {
+        this.plugin = platform.getPlugin();
+        this.server = this.plugin.getServer();
+
         this.fusion = platform.getFusion();
 
         this.fileName = customFile.getFileName();
@@ -47,7 +57,7 @@ public class CustomMenu {
 
         configuration.node("buttons").childrenMap().forEach((object, child) -> this.buttons.add(new CustomButton(child)));
 
-        this.gui = Gui.gui(platform.getPlugin()).disableInteractions().setTitle(this.title).setRows(this.rows).create();
+        this.gui = Gui.gui(this.plugin).disableInteractions().setTitle(this.title).setRows(this.rows).create();
     }
 
     public void build(@NotNull final Player player) {
@@ -60,11 +70,16 @@ public class CustomMenu {
         }
 
         this.buttons.forEach(button -> this.gui.setItem(button.getSlot(), button.getItemBuilder().addPlaceholder("{player}", player.getName()).asGuiItem(player, action -> {
-            if (!(action.getWhoClicked() instanceof Player clicker)) return;
+            if (!(action.getWhoClicked() instanceof Player)) return;
 
-            final Server server = clicker.getServer();
+            new FoliaScheduler(this.plugin, Scheduler.global_scheduler) {
+                @Override
+                public void run() {
+                    final CommandSender sender = server.getConsoleSender();
 
-            button.getCommands().forEach(command -> server.dispatchCommand(server.getConsoleSender(), command.replaceAll("\\{player}", player.getName())));
+                    button.getCommands().forEach(command -> server.dispatchCommand(sender, command.replaceAll("\\{player}", player.getName())));
+                }
+            }.runNow();
 
             button.getMessages().forEach(message -> this.fusion.sendMessage(player, message, new HashMap<>() {{
                 put("{player}", player.getName());
