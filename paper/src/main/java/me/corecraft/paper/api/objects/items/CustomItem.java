@@ -114,16 +114,16 @@ public class CustomItem {
 
         final Server server = this.plugin.getServer();
 
-        this.commands.forEach(command -> {
-            final String output = command.replaceAll("\\{player}", name);
+        new FoliaScheduler(this.plugin, Scheduler.global_scheduler) {
+            @Override
+            public void run() {
+                commands.forEach(command -> {
+                    final String output = command.replaceAll("\\{player}", name);
 
-            new FoliaScheduler(this.plugin, Scheduler.global_scheduler) {
-                @Override
-                public void run() {
                     server.dispatchCommand(server.getConsoleSender(), output);
-                }
-            }.runNow();
-        });
+                });
+            }
+        }.runNow();
     }
 
     public void executeMessages(@NotNull final Player player) {
