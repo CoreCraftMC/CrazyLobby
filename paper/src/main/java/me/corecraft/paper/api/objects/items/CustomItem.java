@@ -17,7 +17,6 @@ import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
@@ -99,11 +98,7 @@ public class CustomItem {
 
         final ItemStack itemStack = itemBuilder.asItemStack(player);
 
-        itemStack.editMeta(itemMeta -> {
-            final PersistentDataContainer container = itemMeta.getPersistentDataContainer();
-
-            container.set(ItemKeys.basic_item.getNamespacedKey(), PersistentDataType.STRING, this.fileName);
-        });
+        itemStack.editPersistentDataContainer(container -> container.set(ItemKeys.basic_item.getNamespacedKey(), PersistentDataType.STRING, this.fileName));
 
         inventory.setItem(this.slot, itemStack);
     }
