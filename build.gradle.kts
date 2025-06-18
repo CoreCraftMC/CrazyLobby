@@ -3,7 +3,7 @@ plugins {
 }
 
 rootProject.description = "The lobby plugin for play.corecraft.me!"
-rootProject.version = "1.0.0"
+rootProject.version = "1.1.0"
 rootProject.group = "me.corecraft"
 
 allprojects {
