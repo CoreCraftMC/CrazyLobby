@@ -6,8 +6,9 @@ import org.jetbrains.annotations.NotNull;
 public enum BypassType {
 
     allow_block_interact("allow_block_interact"),
-    allow_item_drop("allow_item_drop"),
+    allow_item_interact("allow_item_interact"),
     allow_item_pickup("allow_item_pickup"),
+    allow_item_drop("allow_item_drop"),
     no_bypass("no_bypass");
 
     private final String chat;
