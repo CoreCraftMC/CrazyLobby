@@ -50,7 +50,7 @@ public class CommandBypass extends AbstractPaperCommand {
 
             this.messageRegistry.getMessage(MessageKeys.bypass_toggle).send(player, new HashMap<>() {{
                 put("{state}", type.getPrettyName());
-                put("{status}", "Toggle_State");
+                put("{status}", messageRegistry.getMessage(MessageKeys.bypass_toggle_disabled).asString(player));
             }});
 
             return;
@@ -60,7 +60,7 @@ public class CommandBypass extends AbstractPaperCommand {
 
         this.messageRegistry.getMessage(MessageKeys.bypass_toggle).send(player, new HashMap<>() {{
             put("{state}", type.getPrettyName());
-            put("{status}", "Toggle_State");
+            put("{status}", messageRegistry.getMessage(MessageKeys.bypass_toggle_enabled).asString(player));
         }});
     }
 

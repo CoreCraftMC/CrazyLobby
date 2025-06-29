@@ -16,8 +16,10 @@ public interface IMessage {
 
     void send(@NotNull final Audience audience);
 
-    Component getComponent(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders);
+    Component asComponent(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders);
 
-    Component getComponent(@NotNull final Audience audience);
+    Component asComponent(@NotNull final Audience audience);
+
+    String asString(@NotNull final Audience audience);
 
 }

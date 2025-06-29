@@ -41,7 +41,7 @@ public class Message implements IMessage {
 
     @Override
     public void broadcast(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
-        final Component component = getComponent(audience, placeholders);
+        final Component component = asComponent(audience, placeholders);
 
         if (component.equals(Component.empty())) return;
 
@@ -55,7 +55,7 @@ public class Message implements IMessage {
 
     @Override
     public void send(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
-        final Component component = getComponent(audience, placeholders);
+        final Component component = asComponent(audience, placeholders);
 
         if (component.equals(Component.empty())) return;
 
@@ -71,7 +71,7 @@ public class Message implements IMessage {
     }
 
     @Override
-    public Component getComponent(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
+    public Component asComponent(@NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
         if (this.instance.isConsoleSender(audience)) {
             final CommentedConfigurationNode config = this.messages.node(this.path);
 
@@ -86,8 +86,23 @@ public class Message implements IMessage {
     }
 
     @Override
-    public Component getComponent(@NotNull final Audience audience) {
-        return getComponent(audience, new HashMap<>());
+    public Component asComponent(@NotNull final Audience audience) {
+        return asComponent(audience, new HashMap<>());
+    }
+
+    @Override
+    public String asString(@NotNull final Audience audience) {
+        if (this.instance.isConsoleSender(audience)) {
+            final CommentedConfigurationNode config = this.messages.node(this.path);
+
+            return config.isList() ? StringUtils.toString(getStringList(config)) : config.getString(this.defaultValue);
+        }
+
+        final User user = this.userRegistry.getUser(audience);
+
+        final CommentedConfigurationNode node = user.locale().node(this.path);
+
+        return node.isList() ? StringUtils.toString(getStringList(node)) : node.getString(this.defaultValue);
     }
 
     private @NotNull Component parse(@NotNull final String message, @NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
