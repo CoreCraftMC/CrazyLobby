@@ -1,10 +1,9 @@
 package me.corecraft.paper.api;
 
+import com.ryderbelserion.fusion.core.api.utils.FileUtils;
 import com.ryderbelserion.fusion.core.files.FileManager;
 import com.ryderbelserion.fusion.core.files.types.YamlCustomFile;
-import com.ryderbelserion.fusion.core.utils.FileUtils;
 import me.corecraft.paper.CrazyLobbyPlatform;
-import me.corecraft.paper.CrazyLobbyPlugin;
 import me.corecraft.paper.api.objects.items.CustomItem;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;

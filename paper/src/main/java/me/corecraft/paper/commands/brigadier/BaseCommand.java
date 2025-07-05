@@ -1,8 +1,8 @@
 package me.corecraft.paper.commands.brigadier;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperCommand;
-import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperContext;
+import com.ryderbelserion.fusion.paper.api.commands.objects.PaperCommand;
+import com.ryderbelserion.fusion.paper.api.commands.objects.PaperCommandContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import me.corecraft.paper.CrazyLobbyPlatform;
@@ -12,7 +12,7 @@ import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
-public class BaseCommand extends AbstractPaperCommand {
+public class BaseCommand extends PaperCommand {
 
     private final CrazyLobbyPlatform platform;
 
@@ -21,7 +21,7 @@ public class BaseCommand extends AbstractPaperCommand {
     }
 
     @Override
-    public void execute(@NotNull final AbstractPaperContext context) {
+    public void execute(@NotNull final PaperCommandContext context) {
 
     }
 
@@ -36,17 +36,12 @@ public class BaseCommand extends AbstractPaperCommand {
     }
 
     @Override
-    public @NotNull final PermissionDefault getPermissionMode() {
-        return PermissionDefault.OP;
-    }
-
-    @Override
     public @NotNull final List<String> getPermissions() {
         return List.of("crazylobby.use");
     }
 
     @Override
-    public @NotNull final List<AbstractPaperCommand> getChildren() {
+    public @NotNull final List<PaperCommand> getChildren() {
         return List.of(new CommandReload(this.platform), new CommandBypass(this.platform));
     }
 }

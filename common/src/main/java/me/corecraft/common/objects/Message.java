@@ -1,9 +1,9 @@
 package me.corecraft.common.objects;
 
-import com.ryderbelserion.fusion.core.FusionCore;
+import com.ryderbelserion.fusion.core.FusionProvider;
+import com.ryderbelserion.fusion.core.api.FusionCore;
 import com.ryderbelserion.fusion.core.api.exceptions.FusionException;
-import com.ryderbelserion.fusion.kyori.FusionKyori;
-import com.ryderbelserion.fusion.kyori.utils.StringUtils;
+import com.ryderbelserion.fusion.core.api.utils.StringUtils;
 import me.corecraft.api.interfaces.IMessage;
 import me.corecraft.common.CrazyLobby;
 import me.corecraft.common.enums.Files;
@@ -19,10 +19,10 @@ import java.util.Map;
 
 public class Message implements IMessage {
 
-    private final FusionKyori kyori = (FusionKyori) FusionCore.Provider.get();
-
     private final CommentedConfigurationNode config = Files.config.getConfig();
     private final CommentedConfigurationNode messages = Files.messages.getConfig();
+
+    private final FusionCore fusion = FusionProvider.get();
 
     private final UserRegistry userRegistry;
     private final CrazyLobby instance;
@@ -108,7 +108,7 @@ public class Message implements IMessage {
     private @NotNull Component parse(@NotNull final String message, @NotNull final Audience audience, @NotNull final Map<String, String> placeholders) {
         placeholders.putIfAbsent("{prefix}", this.config.node("root", "prefix").getString("<blue>[<gold>ChatManager<blue>] <reset>"));
 
-        return this.kyori.color(audience, message, placeholders);
+        return this.fusion.color(audience, message, placeholders);
     }
 
     private @NotNull List<String> getStringList(@NotNull final CommentedConfigurationNode node) {

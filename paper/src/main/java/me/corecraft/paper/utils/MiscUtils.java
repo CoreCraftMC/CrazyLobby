@@ -2,8 +2,8 @@ package me.corecraft.paper.utils;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import com.ryderbelserion.fusion.core.FusionCore;
-import com.ryderbelserion.fusion.kyori.components.KyoriLogger;
+import com.ryderbelserion.fusion.core.FusionProvider;
+import com.ryderbelserion.fusion.core.api.interfaces.ILogger;
 import me.corecraft.paper.CrazyLobbyPlugin;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ public class MiscUtils {
 
     private static final CrazyLobbyPlugin plugin = CrazyLobbyPlugin.getPlugin();
 
-    private static final KyoriLogger logger = (KyoriLogger) FusionCore.Provider.get().getLogger();
+    private static final ILogger logger = FusionProvider.get().getLogger();
 
     public static void sendServer(@NotNull final Player player, final boolean isVelocity, @NotNull final String server) {
         if (!isVelocity || server.isEmpty()) return;

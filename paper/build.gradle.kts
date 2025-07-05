@@ -11,8 +11,13 @@ dependencies {
 }
 
 tasks {
-    build {
-        dependsOn(shadowJar)
+    shadowJar {
+        archiveBaseName.set("${rootProject.name}-${rootProject.version}")
+
+        copy {
+            from(project.layout.buildDirectory.dir("libs"))
+            into(rootProject.layout.buildDirectory.dir("libs"))
+        }
     }
 
     runServer {

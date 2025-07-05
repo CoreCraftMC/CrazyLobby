@@ -1,8 +1,8 @@
 package me.corecraft.common;
 
-import com.ryderbelserion.fusion.core.files.FileAction;
+import com.ryderbelserion.fusion.core.api.enums.FileAction;
+import com.ryderbelserion.fusion.core.api.enums.FileType;
 import com.ryderbelserion.fusion.core.files.FileManager;
-import com.ryderbelserion.fusion.core.files.FileType;
 import me.corecraft.api.interfaces.platform.ICrazyLobby;
 import me.corecraft.common.registry.MessageRegistry;
 import me.corecraft.common.registry.UserRegistry;
@@ -48,13 +48,13 @@ public abstract class CrazyLobby implements ICrazyLobby {
         this.fileManager.refresh(false);
 
         this.fileManager.addFolder(path.resolve("items"), FileType.YAML, new ArrayList<>() {{
-                    add(FileAction.RELOAD);
+                    add(FileAction.RELOAD_FILE);
                 }}, null)
                 .addFolder(path.resolve("menus"), FileType.YAML, new ArrayList<>() {{
-                    add(FileAction.RELOAD);
+                    add(FileAction.RELOAD_FILE);
                 }}, null)
                 .addFolder(path.resolve("locale"), FileType.YAML, new ArrayList<>() {{
-                    add(FileAction.RELOAD);
+                    add(FileAction.RELOAD_FILE);
                 }}, null);
 
         this.messageRegistry.init();

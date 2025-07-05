@@ -1,8 +1,8 @@
 package me.corecraft.common.registry;
 
-import com.ryderbelserion.fusion.core.FusionCore;
+import com.ryderbelserion.fusion.core.FusionProvider;
+import com.ryderbelserion.fusion.core.api.FusionCore;
 import com.ryderbelserion.fusion.core.api.interfaces.ILogger;
-import com.ryderbelserion.fusion.kyori.FusionKyori;
 import me.corecraft.api.interfaces.IMessage;
 import me.corecraft.api.interfaces.registry.IMessageRegistry;
 import me.corecraft.common.CrazyLobby;
@@ -15,9 +15,9 @@ import java.util.Map;
 
 public class MessageRegistry implements IMessageRegistry {
 
-    private final FusionKyori kyori = (FusionKyori) FusionCore.Provider.get();
+    private final FusionCore fusion = FusionProvider.get();
 
-    private final ILogger logger = this.kyori.getLogger();
+    private final ILogger logger = this.fusion.getLogger();
 
     private final Map<Key, IMessage> messages = new HashMap<>();
 

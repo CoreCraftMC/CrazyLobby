@@ -4,8 +4,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperCommand;
-import com.ryderbelserion.fusion.paper.api.commands.objects.AbstractPaperContext;
+import com.ryderbelserion.fusion.paper.api.commands.objects.PaperCommand;
+import com.ryderbelserion.fusion.paper.api.commands.objects.PaperCommandContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import me.corecraft.common.constants.MessageKeys;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import static io.papermc.paper.command.brigadier.Commands.argument;
 
-public class CommandBypass extends AbstractPaperCommand {
+public class CommandBypass extends PaperCommand {
 
     private final MessageRegistry messageRegistry;
     private final UserRegistry userRegistry;
@@ -32,7 +32,7 @@ public class CommandBypass extends AbstractPaperCommand {
     }
 
     @Override
-    public void execute(@NotNull final AbstractPaperContext context) {
+    public void execute(@NotNull final PaperCommandContext context) {
         if (!context.isPlayer()) {
             this.messageRegistry.getMessage(MessageKeys.must_be_player).send(context.getCommandSender());
 
@@ -80,17 +80,12 @@ public class CommandBypass extends AbstractPaperCommand {
 
             return builder.buildFuture();
         }).executes(context -> {
-            execute(new AbstractPaperContext(context));
+            execute(new PaperCommandContext(context));
 
             return com.mojang.brigadier.Command.SINGLE_SUCCESS;
         });
 
         return root.then(arg1).build();
-    }
-
-    @Override
-    public @NotNull final PermissionDefault getPermissionMode() {
-        return PermissionDefault.OP;
     }
 
     @Override

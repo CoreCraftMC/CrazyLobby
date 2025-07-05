@@ -1,6 +1,6 @@
 package me.corecraft.paper;
 
-import com.ryderbelserion.fusion.kyori.components.KyoriLogger;
+import com.ryderbelserion.fusion.core.api.interfaces.ILogger;
 import com.ryderbelserion.fusion.paper.FusionPaper;
 import me.corecraft.common.CrazyLobby;
 import me.corecraft.paper.api.ItemManager;
@@ -31,7 +31,7 @@ public class CrazyLobbyPlatform extends CrazyLobby {
 
     private final CrazyLobbyPlugin plugin;
     private final FusionPaper fusion;
-    private final KyoriLogger logger;
+    private final ILogger logger;
     private final Server server;
     private final Path path;
 
@@ -104,7 +104,7 @@ public class CrazyLobbyPlatform extends CrazyLobby {
 
     @Override
     public void reload() {
-        this.fusion.reload(false);
+        this.fusion.reload();
 
         super.reload();
 
